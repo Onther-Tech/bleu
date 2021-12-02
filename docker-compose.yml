@@ -5,6 +5,8 @@ services:
     build: ./bleu-daemon
     ports:
       - "9999:9999"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       - postgres
   bleu-server:
@@ -12,6 +14,8 @@ services:
     build: ./bleu-server
     ports:
       - "8888:8888"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       - postgres
   postgres:

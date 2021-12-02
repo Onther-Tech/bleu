@@ -2,7 +2,7 @@
   "l2_enqueue": {
     "start_idx": 0,
     "end_points": [
-      "http://localhost:7878/enqueue/index/"
+      "http://testnet2.optimism.tokamak.network:7878/enqueue/index/"
     ],
     "filter": ""
   }
