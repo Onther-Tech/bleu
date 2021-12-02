@@ -1,19 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import InfoCard from '../../../components/InfoCard';
 import {timeSince} from '../../../utils/time';
 import {
   Avatar,
   Box,
-  Link,
   Table,
   TableBody,
   TableCell,
   TableRow,
   Typography,
 } from '@mui/material';
-import {Loadable, selector, useRecoilValueLoadable} from 'recoil';
+import {atom, useRecoilState} from 'recoil';
 import {api} from '../../../utils/urlResolver';
 import {L2AddressLink, L2TransactionLink} from '../../../components/Link';
+import {MainPageAutoRefresh} from '../../../utils/consts';
 
 interface Transaction {
   tx_hash: string;
@@ -23,13 +23,9 @@ interface Transaction {
   tx_timestamp: string;
 };
 
-const latestTransactionsState = selector({
+const latestTransactionsState = atom<Transaction[]>({
   key: 'LatestTransactions',
-  get: async () => {
-    const res = await fetch(api('/tx/latest'));
-    const txs = await res.json();
-    return txs;
-  },
+  default: [],
 });
 
 const tableRow: Readonly<any> = {
@@ -50,49 +46,61 @@ const tableCellLast: Readonly<any> = {
   pb: '0px',
 };
 
-const content: Readonly<any> = {
-  display: 'flex',
-  flexDirection: 'column',
-};
-
 function LatestTransactions() {
-  const latestTransactions: Loadable<Transaction[]> = useRecoilValueLoadable(latestTransactionsState);
+  const [state, setState] = useRecoilState(latestTransactionsState);
+
+  const reload = () => {
+    (async () => {
+      const res = await fetch(api('/tx/latest'));
+      const json = await res.json();
+      setState(json);
+    })();
+  };
+
+  useEffect(() => {
+    reload();
+    if (MainPageAutoRefresh) {
+      const id = setInterval(reload, 10000);
+      return () => {
+        clearInterval(id);
+      };
+    }
+  }, []);
+
   return (
     <InfoCard title='Latest Transactions' buttonProps={{label:'View all transactions',href:'/txs'}} sx={{height:'500px'}}>
       <Table>
         <TableBody>
           {
-            latestTransactions.state === 'hasValue'
-              ? latestTransactions.contents.map((row, index) => (
-                <TableRow key={index} sx={tableRow}>
-                  <TableCell sx={(index === latestTransactions.contents.length - 1) ? tableCellLast : tableCell}>
-                    <Box sx={{display:'flex',alignItems:'center',gap:'12px',width:'100%'}}>
-                      <Avatar>Tx</Avatar>
-                      <Box sx={{flexGrow:1,flexBasis:0,width:0}}>
-                        <Box sx={{display:'flex',flexGrow:1,gap:'8px'}}>
-                          <Typography>Tx#</Typography>
-                          <L2TransactionLink sx={{width:0,flexGrow:1,flexBasis:0}} hash={row.tx_hash} />
+            state.map((row, index) => (
+              <TableRow key={index} sx={tableRow}>
+                <TableCell sx={(index === state.length - 1) ? tableCellLast : tableCell}>
+                  <Box sx={{display:'flex',alignItems:'center',gap:'12px',width:'100%'}}>
+                    <Avatar>Tx</Avatar>
+                    <Box sx={{flexGrow:1,flexBasis:0,width:0}}>
+                      <Box sx={{display:'flex',flexGrow:1,gap:'8px'}}>
+                        <Typography>Tx#</Typography>
+                        <L2TransactionLink sx={{width:0,flexGrow:1,flexBasis:0}} hash={row.tx_hash} />
+                      </Box>
+                      <Box sx={{display:'flex'}}>
+                        <Box sx={{display:'flex',flexGrow:1, gap:'8px'}}>
+                          <Typography>From</Typography>
+                          <L2AddressLink sx={{width:0,flexGrow:1,flexBasis:0}} address={row.from_address} />
                         </Box>
-                        <Box sx={{display:'flex'}}>
-                          <Box sx={{display:'flex',flexGrow:1, gap:'8px'}}>
-                            <Typography>From</Typography>
-                            <L2AddressLink sx={{width:0,flexGrow:1,flexBasis:0}} address={row.from_address} />
-                          </Box>
-                          <Box sx={{display:'flex',flexGrow:1, gap:'8px'}}>
-                            <Typography>To</Typography>
-                            <L2AddressLink sx={{width:0,flexGrow:1,flexBasis:0}} address={row.to_address} />
-                          </Box>
-                        </Box>
-                        <Box sx={{display:'flex', gap: '10px'}}>
-                          <Typography variant='body2'>{+row.value / Math.pow(10,18)} ETH &gt;</Typography>
-                          <Typography variant='body2' color='text.secondary'>{timeSince(row.tx_timestamp)}</Typography>
+                        <Box sx={{display:'flex',flexGrow:1, gap:'8px'}}>
+                          <Typography>To</Typography>
+                          <L2AddressLink sx={{width:0,flexGrow:1,flexBasis:0}} address={row.to_address} />
                         </Box>
                       </Box>
+                      <Box sx={{display:'flex', gap: '10px'}}>
+                        <Typography variant='body2'>{+row.value / Math.pow(10,18)} ETH &gt;</Typography>
+                        <Typography variant='body2' color='text.secondary'>{timeSince(row.tx_timestamp)}</Typography>
+                      </Box>
                     </Box>
-                  </TableCell>
-                </TableRow>
-              ))
-              : null
+                  </Box>
+                </TableCell>
+              </TableRow>
+            ))
           }
         </TableBody>
       </Table>

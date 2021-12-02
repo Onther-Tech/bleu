@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {useParams} from 'react-router-dom';
+import {useParams, useLocation} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {useRecoilState} from 'recoil';
 import {
@@ -52,35 +52,18 @@ function a11yProps(index: number) {
   };
 }
 
-const header: Readonly<any> = {
-  display: 'flex',
-  px: '16px',
-  py: '12px',
-  gap: '8px',
-  flexShrink: 0,
-};
-
-function Header(props: any) {
-  return (
-    <React.Fragment>
-      <Box sx={header}>
-        <Typography variant='h6'>{props.title}</Typography>
-        <Typography variant='h6' color='text.secondary' sx={{fontWeight:'normal'}}>#{props.blockNumber}</Typography>
-      </Box>
-      <Divider />
-    </React.Fragment>
-  );
-}
-
 function BlockDetails(props: any) {
   const {blockNumber}: any = useParams();
   const [opts, setOpts] = useRecoilState(options);
+  const {search} = useLocation();
+  const isState = new URLSearchParams(search).get('isState') === 'true';
 
   useEffect(() => {
     if (opts.blockNumber !== blockNumber) {
       setOpts({
         ...opts,
         blockNumber: blockNumber,
+        isState: isState,
       });
     }
   });
@@ -93,14 +76,14 @@ function BlockDetails(props: any) {
   };
 
   return (
-    <InfoCard head={<Header title='Transaction Batches' blockNumber={blockNumber} />} contentProps={{m:0}}>
+    <InfoCard title={!isState ? 'Transaction Batches' : 'State Batches'} subtitle={`#${blockNumber}`} contentProps={{m:0}}>
       <Box sx={cardHeaderC1}>
         <Tabs value={opts.index} onChange={handleChange} aria-label='block-details-tabs'>
           <Tab label='Overview' {...a11yProps(0)} />
         </Tabs>
       </Box>
       <TabPanel value={opts.index} index={0}>
-        <Overview />
+        <Overview isState={isState} />
       </TabPanel>
     </InfoCard>
   );

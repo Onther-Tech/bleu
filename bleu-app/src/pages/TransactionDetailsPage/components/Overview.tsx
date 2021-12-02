@@ -22,8 +22,8 @@ function parseInputData(input: string): string {
   let i = 0;
   input = input.slice(10);
   while (input.length > 0) {
-    ret += `\n[${i}]` + (i < 10 ? ' ' : '') + ` ${input.slice(0, 32)}`;
-    input = input.slice(32);
+    ret += `\n[${i}]` + (i < 10 ? ' ' : '') + ` ${input.slice(0, 64)}`;
+    input = input.slice(64);
     i += 1;
   }
   return ret;
@@ -51,7 +51,7 @@ function Overview() {
                   <Typography>Status</Typography>
                 </TableCell>
                 <TableCell>
-                  <Typography>{stateLoadable.contents.tx_ext.state ? 'Success' : 'Failed'}</Typography>
+                  <Typography>{+stateLoadable.contents.tx_ext.state ? 'Success' : 'Failed'}</Typography>
                 </TableCell>
               </TableRow>
               <TableRow>

@@ -17,8 +17,10 @@ const root: Readonly<any> = {
 };
 
 const header: Readonly<any> = {
+  display: 'flex',
   px: '16px',
   py: '12px',
+  gap: '8px',
   flexShrink: 0,
 };
 
@@ -67,6 +69,10 @@ function InfoCard(props: any) {
         <React.Fragment>
           <Box sx={header}>
             <Typography variant='h6'>{t(props.title)}</Typography>
+            {props.subtitle
+              ? <Typography variant='h6' color='text.secondary' sx={{fontWeight:'normal'}}>{props.subtitle}</Typography>
+              : null
+            }
           </Box>
           <Divider />
         </React.Fragment>

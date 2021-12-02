@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {useRecoilState} from 'recoil';
 import {useTranslation} from 'react-i18next';
+import {useLocation} from 'react-router-dom';
 import {
   Box,
   Link,
@@ -25,15 +26,36 @@ function TransactionsList() {
   const [state, setState] = useRecoilState(_state);
   const [opts, setOpts] = useRecoilState(options);
 
+  const {search} = useLocation();
+  const searchParams = new URLSearchParams(search);
+  const blockNum = searchParams.get('blockNum');
+  const isState = searchParams.get('isState') === 'true';
+
   const reload = (count: number, page: number) => {
-    (async () => {
-      const res = await fetch(api('/tx', undefined, {count: count, page: page}));
-      const json = await res.json();
-      setState(json);
-    })();
+    if (!blockNum) {
+      (async () => {
+        const res = await fetch(api('/tx', undefined, {count: count, page: page}));
+        const json = await res.json();
+        setState(json);
+      })();
+    } else {
+      if (!isState) {
+        (async () => {
+          const res = await fetch(api('/tx/tx-batch/index', blockNum, {count: count, page: page}));
+          const json = await res.json();
+          setState(json);
+        })();
+      } else {
+        (async () => {
+          const res = await fetch(api('/tx/stateroot-batch/index', blockNum, {count: count, page: page}));
+          const json = await res.json();
+          setState(json);
+        })();
+      }
+    }
   };
   const handleChangePage = (event: any, newPage: any) => {
-    reload(opts.numRows, newPage+1);
+    reload(opts.numRows, newPage + 1);
   };
   const handleChangeRowsPerPage = (event: any) => {
     const page = Math.floor(((state.page_info.page - 1) * opts.numRows) / +event.target.value);
@@ -41,7 +63,7 @@ function TransactionsList() {
       ...opts,
       numRows: +event.target.value,
     });
-    reload(+event.target.value, page+1);
+    reload(+event.target.value, page + 1);
   };
   const toggleTimestamp = () => {
     setOpts({
@@ -54,8 +76,20 @@ function TransactionsList() {
     reload(opts.numRows, 1);
   }, []);
 
+  const getTitle = () => {
+    if (!blockNum) {
+      return 'Transactions';
+    } else {
+      if (!isState) {
+        return 'Transactions in Batch';
+      } else {
+        return 'Transactions in State Batch';
+      }
+    }
+  };
+
   return (
-    <InfoCard title='Transactions' sx={{height:''}}>
+    <InfoCard title={getTitle()} subtitle={blockNum ? `#${blockNum}` : null} sx={{height:''}}>
       <Table size='small'>
         <TableHead sx={{bgcolor:'background.default'}}>
           <TableRow>

@@ -1,5 +1,8 @@
 import React from 'react';
 import {
+  Box,
+  IconButton,
+  Link,
   Table,
   TableBody,
   TableCell,
@@ -10,8 +13,9 @@ import {useRecoilValueLoadable} from 'recoil';
 import {state} from './state';
 import {L1TransactionLink} from '../../../components/Link';
 import {timeSince} from '../../../utils/time';
+import {ArrowLeft, ArrowRight} from '@mui/icons-material';
 
-function Overview() {
+function Overview(props: any) {
   const block = useRecoilValueLoadable(state);
 
   return (
@@ -41,7 +45,7 @@ function Overview() {
                   <Typography>Batch Size</Typography>
                 </TableCell>
                 <TableCell>
-                  <Typography>{block.contents.batch_size}</Typography>
+                  <Link underline='none' href={`/txs?blockNum=${block.contents.batch_index}&isState=${props.isState}`}>{block.contents.batch_size}</Link>
                 </TableCell>
               </TableRow>
               <TableRow>

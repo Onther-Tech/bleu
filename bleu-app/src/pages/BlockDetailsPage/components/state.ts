@@ -19,6 +19,7 @@ export const options = atom({
   default: {
     index: 0,
     blockNumber: 0,
+    isState: false,
   },
 });
 
@@ -29,8 +30,12 @@ export const state = selector<State>({
     if (opts.blockNumber === 0) {
       return;
     }
-    const res = await fetch(api('/tx-batch/index', opts.blockNumber.toString()));
-    const block = await res.json();
-    return block;
+    if (!opts.isState) {
+      const res = await fetch(api('/tx-batch/index', opts.blockNumber.toString()));
+      return await res.json();
+    } else {
+      const res = await fetch(api('/stateroot-batch/index', opts.blockNumber.toString()));
+      return await res.json();
+    }
   },
 });

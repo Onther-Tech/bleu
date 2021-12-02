@@ -68,7 +68,7 @@ function Header(props: any) {
   };
 
   return (
-    <ContentBody sx={{bgcolor:'background.paper',zIndex:1301}} content={{py:'8px'}} ref={headerEl}>
+    <ContentBody sx={{bgcolor:'background.paper',zIndex:{xs:1301,sm:1301,md:1100}}} content={{py:'8px'}} ref={headerEl}>
       <Box sx={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
         <Logo />
         <Box sx={{display:{xs:'none',sm:'none',md:'flex'}}}>
@@ -93,6 +93,7 @@ function Header(props: any) {
               <MenuItem href='/txs'>Transactions</MenuItem>
               <Divider sx={{my:'8px'}} />
               <MenuItem href='/blocks'>Transaction Batches</MenuItem>
+              <MenuItem href='/blocks?isState=true'>State Batches</MenuItem>
             </Box>
           </Popover>
           <Popover open={opts.index === 1} anchorEl={opts.anchorEl} anchorOrigin={{horizontal:'left',vertical:'bottom'}} onMouseMove={outMenu} sx={{cursor:'pointer'}}>
@@ -109,6 +110,7 @@ function Header(props: any) {
         <Box>
           <MenuItem sx={{width:'100%-56px',height:'40px'}} href='/txs'>Transactions</MenuItem>
           <MenuItem sx={{width:'100%-56px',height:'40px'}} href='/blocks'>Transaction Batches</MenuItem>
+          <MenuItem sx={{width:'100%-56px',height:'40px'}} href='/blocks?isState=true'>State Batches</MenuItem>
         </Box>
       </Drawer>
     </ContentBody>

@@ -2,21 +2,21 @@ import {atom} from 'recoil';
 
 export interface State {
   page_info: {
-    page: number;
     count: number;
-    total_page: number;
+    page: number;
     total_count: number;
+    total_page: number;
   },
   records: {
-    optimism_tx_batches_id: number;
     batch_index: string;
-    batch_timestamp: string;
-    batch_size: string;
-    l1_tx_hash: string;
-    l1_block_number: string;
     batch_root: string;
-    previous_total_elements: string;
+    batch_size: string;
+    batch_timestamp: string;
     extra_data: string;
+    l1_block_number: string;
+    l1_tx_hash: string;
+    optimism_tx_batches_id: number;
+    previous_total_elements: string;
     submitter: string;
   }[];
 }

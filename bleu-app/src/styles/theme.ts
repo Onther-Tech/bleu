@@ -61,7 +61,7 @@ const theme = (mode: PaletteMode = 'light') => createTheme({
                 }),
             },
           },
-        }
+        },
       ],
     },
     MuiTypography: {

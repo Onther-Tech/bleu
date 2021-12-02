@@ -12,7 +12,7 @@ function Logs() {
   return (
     <React.Fragment>
       {
-        stateLoadable.state === 'hasValue'
+        stateLoadable.state === 'hasValue' && stateLoadable.contents
         ? (
           <Table>
             <TableBody>
