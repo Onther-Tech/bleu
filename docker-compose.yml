@@ -10,9 +10,9 @@ services:
     depends_on:
       - postgres
     volumes:
-      - /absolute/host/path/task:/bleu-daemon/task
-      - /absolute/host/path/schema:/bleu-daemon/schema
-      - /absolute/host/path/config.docker.toml:/bleu-daemon/config.toml
+      - ./bleu-daemon/task:/bleu-daemon/task
+      - ./bleu-daemon/schema:/bleu-daemon/schema
+      - ./bleu-daemon/config.docker.toml:/bleu-daemon/config.toml
   bleu-server:
     container_name: bleu-server
     build: ./bleu-server
@@ -22,8 +22,10 @@ services:
       - "host.docker.internal:host-gateway"
     depends_on:
       - postgres
-    volumes:
-      - /absolute/host/path/.env.docker:/bleu-server/.env
+    environment:
+      - POSTGRES_URL=postgres://root:postgresql@host.docker.internal:5432/postgres
+      - SERVER_HOST=0.0.0.0
+      - SERVER_PORT=8888
   postgres:
     image: postgres
     container_name: postgres
