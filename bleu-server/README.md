@@ -64,7 +64,7 @@ docker build --tag bleu-server .
 ### Run Docker
 ```shell
 docker run -d -p 8888:8888 \
--v /absolute/host/path/.env:/bleu-server/.env \
+-v /absolute/host/path/.env.docker:/bleu-server/.env \
 --name bleu-server \
 bleu-server:latest
 ```

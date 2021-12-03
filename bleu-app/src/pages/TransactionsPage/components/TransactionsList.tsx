@@ -12,6 +12,7 @@ import {
   TablePagination,
   TableRow,
   TableCell,
+  Tooltip,
   Typography,
 } from '@mui/material';
 import InfoCard from '../../../components/InfoCard';
@@ -139,7 +140,11 @@ function TransactionsList() {
                     {
                       row.tx.to_address
                       ? <L2AddressLink sx={{width: 0, flexGrow: 1, flexBasis: 0}} address={row.tx.to_address}/>
-                      : <Link underline='none' href={`/account/${row.contract_address}`}>Contract Creation</Link>
+                      : <Tooltip title={row.contract_address}>
+                          <Link underline='none' href={`/account/${row.contract_address}`}>
+                            Contract Creation
+                          </Link>
+                        </Tooltip>
                     }
                   </Box>
                 </TableCell>
