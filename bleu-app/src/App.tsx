@@ -1,8 +1,8 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import {RecoilRoot} from 'recoil';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
 import Box from '@mui/material/Box';
-import {ThemeProvider} from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import theme from './styles/theme';
 import './App.css';
 import './i18n';
@@ -39,16 +39,16 @@ function App() {
             <Header />
             <Router>
               <Switch>
-                <Route path='/txs'>
+                <Route path="/txs">
                   <TransactionsPage />
                 </Route>
-                <Route path='/blocks'>
+                <Route path="/blocks">
                   <BlocksPage />
                 </Route>
                 <Route path={'/l1l2txs'}>
                   <L1L2TransactionsPage />
                 </Route>
-                <Route path='/account/:address'>
+                <Route path="/account/:address">
                   <AccountPage />
                 </Route>
                 <Route path={'/block/:blockNumber'}>
@@ -57,7 +57,7 @@ function App() {
                 <Route path={'/tx/:txHash'}>
                   <TransactionDetailsPage />
                 </Route>
-                <Route path='/'>
+                <Route path="/">
                   <MainPage />
                 </Route>
               </Switch>

@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  Box,
-  Grid,
-} from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import LatestL1Batches from './components/LatestL1Batches';
 import LatestTransactions from './components/LatestTransactions';
 import LatestL1L2Transactions from './components/LatestL1L2Transactions';

@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Box,
-} from '@mui/material';
+import { Box } from '@mui/material';
 import {
   MainContentMaxWidth,
   MainContentPaddingHorizontal,
@@ -29,11 +27,9 @@ const content: Readonly<any> = {
 };
 
 const ContentBody = React.forwardRef((props: any, ref: any) => (
-  <Box sx={{...root, ...props.sx}} ref={ref}>
+  <Box sx={{ ...root, ...props.sx }} ref={ref}>
     <Box sx={main}>
-      <Box sx={{...content, ...props.content}}>
-        {props.children}
-      </Box>
+      <Box sx={{ ...content, ...props.content }}>{props.children}</Box>
     </Box>
   </Box>
 ));

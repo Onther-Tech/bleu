@@ -1,14 +1,10 @@
-import React, {useEffect} from 'react';
-import {useParams} from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {useRecoilState} from 'recoil';
+import { useRecoilState } from 'recoil';
 import InfoCard from '../../../components/InfoCard';
-import {
-  Box,
-  Tab,
-  Tabs,
-} from '@mui/material';
-import {options} from './state';
+import { Box, Tab, Tabs } from '@mui/material';
+import { options } from './state';
 import Overview from './Overview';
 import Logs from './Logs';
 
@@ -22,18 +18,14 @@ function TabPanel(props: any) {
 
   return (
     <Box
-      role='tabpanel'
+      role="tabpanel"
       hidden={value !== index}
       id={`transaction-details-tabpanel-${index}`}
       aria-labelledby={`transaction-details-tab-${index}`}
       {...other}
-      sx={{px:'12px'}}
+      sx={{ px: '12px' }}
     >
-      {value === index && (
-        <React.Fragment>
-          {children}
-        </React.Fragment>
-      )}
+      {value === index && <React.Fragment>{children}</React.Fragment>}
     </Box>
   );
 }
@@ -52,7 +44,7 @@ function a11yProps(index: number) {
 }
 
 function TransactionDetails(props: any) {
-  const {txHash}: any = useParams();
+  const { txHash }: any = useParams();
   const [opts, setOpts] = useRecoilState(options);
 
   useEffect(() => {
@@ -70,12 +62,12 @@ function TransactionDetails(props: any) {
   };
 
   return (
-    <InfoCard title='Transaction Details' contentProps={{m:0}}>
+    <InfoCard title="Transaction Details" contentProps={{ m: 0 }}>
       <Box sx={cardHeaderC1}>
-        <Tabs value={opts.index} onChange={handleChange} aria-label='transaction-details-tabs'>
-          <Tab label='Overview' {...a11yProps(0)} />
-          <Tab label='Logs' {...a11yProps(1)} />
-          <Tab label='Comments' {...a11yProps(2)} />
+        <Tabs value={opts.index} onChange={handleChange} aria-label="transaction-details-tabs">
+          <Tab label="Overview" {...a11yProps(0)} />
+          <Tab label="Logs" {...a11yProps(1)} />
+          <Tab label="Comments" {...a11yProps(2)} />
         </Tabs>
       </Box>
       <TabPanel value={opts.index} index={0}>

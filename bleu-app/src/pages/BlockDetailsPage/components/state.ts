@@ -1,5 +1,5 @@
-import {atom, selector} from 'recoil';
-import {api} from '../../../utils/urlResolver';
+import { atom, selector } from 'recoil';
+import { api } from '../../../utils/urlResolver';
 
 export interface State {
   optimism_tx_batches_id: number;
@@ -25,7 +25,7 @@ export const options = atom({
 
 export const state = selector<State>({
   key: 'BlockPageState',
-  get: async ({get}) => {
+  get: async ({ get }) => {
     const opts = get(options);
     if (opts.blockNumber === 0) {
       return;

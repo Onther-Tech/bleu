@@ -1,6 +1,6 @@
-import {selector} from 'recoil';
-import {api} from '../../../../utils/urlResolver';
-import {options} from '../state';
+import { selector } from 'recoil';
+import { api } from '../../../../utils/urlResolver';
+import { options } from '../state';
 
 export interface Transaction {
   l1_origin_tx_hash: string;
@@ -34,12 +34,12 @@ export interface Transaction {
       value: string;
     };
     state: string;
-  }
+  };
 }
 
 export const state = selector<Transaction>({
   key: 'TransactionPageOverviewState',
-  get: async ({get}) => {
+  get: async ({ get }) => {
     const opts = get(options);
     if (opts.txHash.length === 0) {
       return;
@@ -53,4 +53,3 @@ export const state = selector<Transaction>({
     }
   },
 });
-

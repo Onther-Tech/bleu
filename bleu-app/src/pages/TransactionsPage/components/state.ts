@@ -1,4 +1,4 @@
-import {atom} from 'recoil';
+import { atom } from 'recoil';
 
 export interface Options {
   numRows: number;
@@ -36,7 +36,7 @@ export interface State {
       tx_input: string;
       tx_type: string;
       value: string;
-    }
+    };
   }[];
 }
 
