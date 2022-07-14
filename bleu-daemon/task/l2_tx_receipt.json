@@ -2,7 +2,7 @@
   "l2_tx_receipt": {
     "start_idx": 0,
     "end_points": [
-      "http://localhost:8545"
+      "https://testnet3.optimism.tokamak.network"
     ],
     "filter": ""
   }
