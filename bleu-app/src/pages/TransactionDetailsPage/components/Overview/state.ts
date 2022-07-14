@@ -7,6 +7,9 @@ export interface Transaction {
   tx_ext: {
     contract_address: string;
     gas_used: string;
+    l1_gas_used: string;
+    l1_gas_price: string;
+    l1_fee_scalar: string;
     l1_state_batch_index: string;
     l1_state_root_submission_tx_hash: string;
     l1_submission_tx_hash: string;

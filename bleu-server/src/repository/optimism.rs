@@ -100,6 +100,10 @@ pub mod tx {
                     optimism_state_roots::columns::l1_tx_hash.nullable(),
                     optimism_tx_receipts::columns::status.nullable(),
                     optimism_tx_receipts::columns::gas_used.nullable(),
+                    optimism_tx_receipts::columns::l1_fee.nullable(),
+                    optimism_tx_receipts::columns::l1_fee_scalar.nullable(),
+                    optimism_tx_receipts::columns::l1_gas_price.nullable(),
+                    optimism_tx_receipts::columns::l1_gas_used.nullable(),
                     optimism_tx_receipts::columns::contract_address.nullable()
                 ));
             if tx_hash.is_some() {

@@ -108,7 +108,7 @@ function Overview() {
             </TableRow>
             <TableRow>
               <TableCell>
-                <Typography>Gas Price</Typography>
+                <Typography>L2 Gas Price</Typography>
               </TableCell>
               <TableCell>
                 <Typography>{(+stateLoadable.contents.tx_ext.tx.gas_price).toLocaleString()} Wei</Typography>
@@ -116,10 +116,34 @@ function Overview() {
             </TableRow>
             <TableRow>
               <TableCell>
-                <Typography>Gas Used</Typography>
+                <Typography>L2 Gas Used</Typography>
               </TableCell>
               <TableCell>
                 <Typography>{(+stateLoadable.contents.tx_ext.gas_used).toLocaleString()}</Typography>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Typography>L1 Gas Used</Typography>
+              </TableCell>
+              <TableCell>
+                <Typography>{(+stateLoadable.contents.tx_ext.l1_gas_used).toLocaleString()}</Typography>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Typography>L1 Gas Price</Typography>
+              </TableCell>
+              <TableCell>
+                <Typography>{(+stateLoadable.contents.tx_ext.l1_gas_price).toLocaleString()} Wei</Typography>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Typography>L1 Fee Scalar</Typography>
+              </TableCell>
+              <TableCell>
+                <Typography>{(+stateLoadable.contents.tx_ext.l1_fee_scalar).toLocaleString()}</Typography>
               </TableCell>
             </TableRow>
             <TableRow>

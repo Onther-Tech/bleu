@@ -144,7 +144,7 @@ impl L2TxReceiptPlugin {
             return Err(ExpectedError::NoneError(format!("receipt does not created...tx_hash={}", tx_hash)));
         }
         let receipt = get_object(&response, "result")?;
-        let converted_receipt = hex_to_decimal_converter(receipt, vec!["blockNumber", "cumulativeGasUsed", "gasUsed", "status", "transactionIndex"])?;
+        let converted_receipt = hex_to_decimal_converter(receipt, vec!["blockNumber", "cumulativeGasUsed", "gasUsed", "l1Fee", "l1GasPrice", "l1GasUsed", "status", "transactionIndex"])?;
         let pg_sender = senders.get("postgres");
         let _ = pg_sender.send(PostgresMsg::new(String::from("optimism_tx_receipts"), Value::Object(converted_receipt.to_owned())))?;
         let logs = get_array(&receipt, "logs")?;
