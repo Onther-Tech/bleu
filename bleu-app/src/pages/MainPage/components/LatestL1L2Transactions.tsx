@@ -1,18 +1,10 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import InfoCard from '../../../components/InfoCard';
-import {
-  Avatar,
-  Box,
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
-  Typography,
-} from '@mui/material';
-import {atom, useRecoilState} from 'recoil';
-import {L1BlockLink, L1TransactionLink, L2TransactionLink} from '../../../components/Link';
-import {api} from '../../../utils/urlResolver';
-import {MainPageAutoRefresh} from '../../../utils/consts';
+import { Avatar, Box, Table, TableBody, TableCell, TableRow, Typography } from '@mui/material';
+import { atom, useRecoilState } from 'recoil';
+import { L1BlockLink, L1TransactionLink, L2TransactionLink } from '../../../components/Link';
+import { api } from '../../../utils/urlResolver';
+import { MainPageAutoRefresh } from '../../../utils/consts';
 
 interface L1L2Transaction {
   l1_block_number: string;
@@ -65,36 +57,45 @@ function LatestL1L2Transactions() {
   }, []);
 
   return (
-    <InfoCard title='Latest L1→L2 Transactions' buttonProps={{label:'View all L1→L2 transactions',href:'/l1l2txs'}} sx={{height:'500px'}}>
+    <InfoCard
+      title="Latest L1→L2 Transactions"
+      buttonProps={{ label: 'View all L1→L2 transactions', href: '/l1l2txs' }}
+      sx={{ height: '500px' }}
+    >
       <Table>
         <TableBody>
-          {
-            state.map((row, index) => (
-              <TableRow key={index} sx={tableRow}>
-                <TableCell sx={(index === state.length - 1) ? tableCellLast : tableCell}>
-                  <Box sx={{display:'flex',alignItems:'center',gap:'12px',width:'100%'}}>
-                    <Avatar>Tx</Avatar>
-                    <Box sx={{flexGrow:1,flexBasis:0,width:0}}>
-                      <Box sx={{display:'flex',gap:'4px'}}>
-                        <Typography>Block#</Typography>
-                        <L1BlockLink blockNumber={row.l1_block_number} />
+          {state.map((row, index) => (
+            <TableRow key={index} sx={tableRow}>
+              <TableCell sx={index === state.length - 1 ? tableCellLast : tableCell}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '12px',
+                    width: '100%',
+                  }}
+                >
+                  <Avatar>Tx</Avatar>
+                  <Box sx={{ flexGrow: 1, flexBasis: 0, width: 0 }}>
+                    <Box sx={{ display: 'flex', gap: '4px' }}>
+                      <Typography>Block#</Typography>
+                      <L1BlockLink blockNumber={row.l1_block_number} />
+                    </Box>
+                    <Box sx={{ display: 'flex' }}>
+                      <Box sx={{ display: 'flex', flexGrow: 1, gap: '8px' }}>
+                        <Typography>L1 Tx#</Typography>
+                        <L1TransactionLink sx={{ width: 0, flexGrow: 1, flexBasis: 0 }} hash={row.l1_tx_hash} />
                       </Box>
-                      <Box sx={{display:'flex'}}>
-                        <Box sx={{display:'flex',flexGrow:1, gap:'8px'}}>
-                          <Typography>L1 Tx#</Typography>
-                          <L1TransactionLink sx={{width:0,flexGrow:1,flexBasis:0}} hash={row.l1_tx_hash} />
-                        </Box>
-                        <Box sx={{display:'flex',flexGrow:1, gap:'8px'}}>
-                          <Typography>L2 Tx#</Typography>
-                          <L2TransactionLink sx={{width:0,flexGrow:1,flexBasis:0}} hash={row.l2_tx_hash} />
-                        </Box>
+                      <Box sx={{ display: 'flex', flexGrow: 1, gap: '8px' }}>
+                        <Typography>L2 Tx#</Typography>
+                        <L2TransactionLink sx={{ width: 0, flexGrow: 1, flexBasis: 0 }} hash={row.l2_tx_hash} />
                       </Box>
                     </Box>
                   </Box>
-                </TableCell>
-              </TableRow>
-            ))
-          }
+                </Box>
+              </TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </InfoCard>

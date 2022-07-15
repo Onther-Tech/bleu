@@ -102,6 +102,10 @@ pub struct OptimismBlockTxExtended {
     l1_state_root_submission_tx_hash: Option<String>,
     state: Option<String>,
     gas_used: Option<String>,
+    l1_fee: Option<String>,
+    l1_fee_scalar: Option<String>,
+    l1_gas_price: Option<String>,
+    l1_gas_used: Option<String>,
     contract_address: Option<String>,
 }
 

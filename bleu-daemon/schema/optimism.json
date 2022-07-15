@@ -357,6 +357,22 @@
         "type": [ "string", "null" ],
         "description": "gasUsed"
       },
+      "l1_fee": {
+        "type": [ "string", "null" ],
+        "description": "l1Fee"
+      },
+      "l1_fee_scalar": {
+        "type": [ "string", "null" ],
+        "description": "l1FeeScalar"
+      },
+      "l1_gas_price": {
+        "type": [ "string", "null" ],
+        "description": "l1GasPrice"
+      },
+      "l1_gas_used": {
+        "type": [ "string", "null" ],
+        "description": "l1GasUsed"
+      },
       "logs_bloom": {
         "type": [ "string", "null" ],
         "description": "logsBloom"

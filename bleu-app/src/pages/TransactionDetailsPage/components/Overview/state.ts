@@ -1,12 +1,15 @@
-import {selector} from 'recoil';
-import {api} from '../../../../utils/urlResolver';
-import {options} from '../state';
+import { selector } from 'recoil';
+import { api } from '../../../../utils/urlResolver';
+import { options } from '../state';
 
 export interface Transaction {
   l1_origin_tx_hash: string;
   tx_ext: {
     contract_address: string;
     gas_used: string;
+    l1_gas_used: string;
+    l1_gas_price: string;
+    l1_fee_scalar: string;
     l1_state_batch_index: string;
     l1_state_root_submission_tx_hash: string;
     l1_submission_tx_hash: string;
@@ -34,12 +37,12 @@ export interface Transaction {
       value: string;
     };
     state: string;
-  }
+  };
 }
 
 export const state = selector<Transaction>({
   key: 'TransactionPageOverviewState',
-  get: async ({get}) => {
+  get: async ({ get }) => {
     const opts = get(options);
     if (opts.txHash.length === 0) {
       return;
@@ -53,4 +56,3 @@ export const state = selector<Transaction>({
     }
   },
 });
-

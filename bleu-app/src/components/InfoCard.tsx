@@ -1,15 +1,7 @@
 import React from 'react';
-import {
-  Box,
-  Button,
-  Divider,
-  Paper,
-  Typography,
-} from '@mui/material';
-import {useTranslation} from 'react-i18next';
-import {
-  InfoCardContentPadding,
-} from '../styles/consts';
+import { Box, Button, Divider, Paper, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { InfoCardContentPadding } from '../styles/consts';
 
 const root: Readonly<any> = {
   display: 'flex',
@@ -47,12 +39,14 @@ const footerButton: Readonly<any> = {
 
 function BottomButton(props: any) {
   if (props.buttonProps !== undefined) {
-    const {t} = useTranslation('', {useSuspense: false});
+    const { t } = useTranslation('', { useSuspense: false });
     return (
       <React.Fragment>
         <Divider />
-        <Box sx={footer} >
-          <Button variant='common' sx={footerButton} href={props.buttonProps.href}>{t(props.buttonProps.label)}</Button>
+        <Box sx={footer}>
+          <Button variant="common" sx={footerButton} href={props.buttonProps.href}>
+            {t(props.buttonProps.label)}
+          </Button>
         </Box>
       </React.Fragment>
     );
@@ -62,24 +56,25 @@ function BottomButton(props: any) {
 }
 
 function InfoCard(props: any) {
-  const {t} = useTranslation('', {useSuspense: false});
+  const { t } = useTranslation('', { useSuspense: false });
   return (
-    <Paper sx={{...root, ...props.sx}}>
-      {props.head ? props.head : (
+    <Paper sx={{ ...root, ...props.sx }}>
+      {props.head ? (
+        props.head
+      ) : (
         <React.Fragment>
           <Box sx={header}>
-            <Typography variant='h6'>{t(props.title)}</Typography>
-            {props.subtitle
-              ? <Typography variant='h6' color='text.secondary' sx={{fontWeight:'normal'}}>{props.subtitle}</Typography>
-              : null
-            }
+            <Typography variant="h6">{t(props.title)}</Typography>
+            {props.subtitle ? (
+              <Typography variant="h6" color="text.secondary" sx={{ fontWeight: 'normal' }}>
+                {props.subtitle}
+              </Typography>
+            ) : null}
           </Box>
           <Divider />
         </React.Fragment>
       )}
-      <Box sx={{...content, ...props.contentProps}}>
-        {props.children}
-      </Box>
+      <Box sx={{ ...content, ...props.contentProps }}>{props.children}</Box>
       <BottomButton buttonProps={props.buttonProps} />
     </Paper>
   );

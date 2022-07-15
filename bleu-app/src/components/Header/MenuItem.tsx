@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  Link,
-  Typography,
-} from '@mui/material';
+import { Link, Typography } from '@mui/material';
 
 const root = {
   display: 'flex',
@@ -18,10 +15,8 @@ const root = {
 
 function MenuItem(props: any) {
   return (
-    <Link color='text.primary' href={props.href} underline='none' sx={{...root, ...props.sx}}>
-      <Typography>
-        {props.children}
-      </Typography>
+    <Link color="text.primary" href={props.href} underline="none" sx={{ ...root, ...props.sx }}>
+      <Typography>{props.children}</Typography>
     </Link>
   );
 }

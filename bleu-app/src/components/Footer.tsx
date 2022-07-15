@@ -100,11 +100,17 @@ const button = {
 
 const Logo = () => {
   return (
-    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" width="30" height="30">
-      <rect x='0' y='0' width='30' height='30' style={{fill: '#555'}} />
-      <rect x='7' y='5' width='16' height='3' style={{fill: '#fefefe'}} />
-      <rect x='7' y='10' width='16' height='3' style={{fill: '#fefefe'}} />
-      <rect x='13' y='10' width='4' height='15' style={{fill: '#fefefe'}} />
+    <svg
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      width="30"
+      height="30"
+    >
+      <rect x="0" y="0" width="30" height="30" style={{ fill: '#555' }} />
+      <rect x="7" y="5" width="16" height="3" style={{ fill: '#fefefe' }} />
+      <rect x="7" y="10" width="16" height="3" style={{ fill: '#fefefe' }} />
+      <rect x="13" y="10" width="4" height="15" style={{ fill: '#fefefe' }} />
     </svg>
   );
 };
@@ -117,9 +123,12 @@ export default function Footer() {
           <Box sx={inner}>
             <Box sx={innerItemFirst}>
               <Box sx={logoBox}>
-                <Logo /><Typography sx={{paddingLeft: '10px'}}>Powered by Turnpike</Typography>
+                <Logo />
+                <Typography sx={{ paddingLeft: '10px' }}>Powered by Turnpike</Typography>
               </Box>
-              <Typography sx={logoBoxText}>BLEU is a set of tools to build a blockchain explorer for any protocols.</Typography>
+              <Typography sx={logoBoxText}>
+                BLEU is a set of tools to build a blockchain explorer for any protocols.
+              </Typography>
             </Box>
             <Box sx={innerItem}>
               <Typography>Column 1</Typography>
@@ -139,10 +148,10 @@ export default function Footer() {
               <Divider sx={innerItemDivider} />
             </Box>
           </Box>
-          <Divider variant='middle' light={true} sx={divider} />
+          <Divider variant="middle" light={true} sx={divider} />
           <Box sx={copyright}>
-            <Typography sx={{fontSize: '0.9rem'}}>BLEU &copy; 2021 Turnpike</Typography>
-            <a href='https://github.com/turnpike/bleu' target='_blank'>
+            <Typography sx={{ fontSize: '0.9rem' }}>BLEU &copy; 2021 Turnpike</Typography>
+            <a href="https://github.com/turnpike/bleu" target="_blank">
               <Box sx={buttonBg}>
                 <GitHub sx={button} />
               </Box>
@@ -152,4 +161,4 @@ export default function Footer() {
       </Box>
     </Box>
   );
-};
+}

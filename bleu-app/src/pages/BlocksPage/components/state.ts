@@ -1,4 +1,4 @@
-import {atom} from 'recoil';
+import { atom } from 'recoil';
 
 export interface State {
   page_info: {
@@ -6,7 +6,7 @@ export interface State {
     page: number;
     total_count: number;
     total_page: number;
-  },
+  };
   records: {
     batch_index: string;
     batch_root: string;

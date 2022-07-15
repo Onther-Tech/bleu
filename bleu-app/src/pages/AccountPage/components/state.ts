@@ -1,6 +1,6 @@
-import {atom, selector} from 'recoil';
-import {api} from '../../../utils/urlResolver';
-import {L2JsonRpcEndpoint} from '../../../utils/consts';
+import { atom, selector } from 'recoil';
+import { api } from '../../../utils/urlResolver';
+import { L2JsonRpcEndpoint } from '../../../utils/consts';
 
 export const options = atom({
   key: 'AccountPageOptions',
@@ -16,7 +16,7 @@ export const tabIndex = atom({
 
 export const balance = selector({
   key: 'AccountPageState',
-  get: async ({get}) => {
+  get: async ({ get }) => {
     const opts = get(options);
     try {
       if (opts.address.length > 0) {

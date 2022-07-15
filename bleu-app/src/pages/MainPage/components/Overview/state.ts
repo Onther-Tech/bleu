@@ -1,7 +1,7 @@
-import {selector} from 'recoil';
-import {ethers} from 'ethers';
-import {L2JsonRpcEndpoint} from '../../../../utils/consts';
-import {api} from '../../../../utils/urlResolver';
+import { selector } from 'recoil';
+import { ethers } from 'ethers';
+import { L2JsonRpcEndpoint } from '../../../../utils/consts';
+import { api } from '../../../../utils/urlResolver';
 import erc20ABI from './erc20.abi.json';
 
 const provider = new ethers.providers.JsonRpcProvider(L2JsonRpcEndpoint);
@@ -25,5 +25,5 @@ export const summary = selector<Summary>({
   get: async () => {
     const res = await fetch(api('/board/summary'));
     return await res.json();
-  }
+  },
 });

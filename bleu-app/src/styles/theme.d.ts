@@ -1,4 +1,4 @@
-import {ButtonPropsVariantOverrides} from '@mui/material';
+import { ButtonPropsVariantOverrides } from '@mui/material';
 
 declare module '@mui/material/Button' {
   export interface ButtonPropsVariantOverrides {

@@ -1,4 +1,4 @@
-import {atom, selector} from 'recoil';
+import { atom, selector } from 'recoil';
 
 export const options = atom({
   key: 'AccountPageTransactionsOptions',
@@ -40,7 +40,7 @@ interface State {
       tx_input: string;
       tx_type: string;
       value: string;
-    }
+    };
   }[];
 }
 
