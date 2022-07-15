@@ -55,6 +55,48 @@ function Overview() {
             </TableRow>
             <TableRow>
               <TableCell>
+                <Typography>L1 Txn Batch Index</Typography>
+              </TableCell>
+              <TableCell>
+                <Typography>{stateLoadable.contents.tx_ext.l1_tx_batch_index}</Typography>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Typography>L1 Submission Tx Hash</Typography>
+              </TableCell>
+              <TableCell>
+                <Typography>{stateLoadable.contents.tx_ext.l1_submission_tx_hash}</Typography>
+              </TableCell>
+            </TableRow>
+            {stateLoadable.contents.l1_origin_tx_hash ? (
+              <TableRow>
+                <TableCell>
+                  <Typography>L1 Origin Tx Hash</Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography>{stateLoadable.contents.l1_origin_tx_hash}</Typography>
+                </TableCell>
+              </TableRow>
+            ) : null}
+            <TableRow>
+              <TableCell>
+                <Typography>L1 State Batch Index</Typography>
+              </TableCell>
+              <TableCell>
+                <Typography>{stateLoadable.contents.tx_ext.l1_state_batch_index}</Typography>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
+                <Typography>L1 State Root Submission Tx Hash</Typography>
+              </TableCell>
+              <TableCell>
+                <Typography>{stateLoadable.contents.tx_ext.l1_state_root_submission_tx_hash}</Typography>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>
                 <Typography>Timestamp</Typography>
               </TableCell>
               <TableCell>

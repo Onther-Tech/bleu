@@ -94,7 +94,7 @@ impl L2StateBatchPlugin {
         let batch = get_object(&response, "batch")?;
         let converted_batch = number_to_string_convert(batch, vec!["index", "blockNumber", "timestamp", "size", "prevTotalElements"])?;
         let pg_sender = senders.get("postgres");
-        let _ = pg_sender.send(PostgresMsg::new(String::from("optimism_state_batches"), Value::Object(batch.clone())))?;
+        let _ = pg_sender.send(PostgresMsg::new(String::from("optimism_batches_scc"), Value::Object(batch.clone())))?;
 
         let state_roots = get_array(&response, "stateRoots")?;
         let l1_tx_hash = opt_to_result(converted_batch.get("l1TransactionHash"))?;
@@ -102,7 +102,7 @@ impl L2StateBatchPlugin {
             let state_root_map = opt_to_result(state_root.as_object())?;
             let mut converted_state_root = number_to_string_convert(state_root_map, vec!["index", "batchIndex"])?;
             converted_state_root.insert(String::from("l1_tx_hash"), l1_tx_hash.clone());
-            let _ = pg_sender.send(PostgresMsg::new(String::from("optimism_state_roots"), Value::Object(converted_state_root)))?;
+            let _ = pg_sender.send(PostgresMsg::new(String::from("optimism_batches_scc_roots"), Value::Object(converted_state_root)))?;
         }
         Ok(())
     }

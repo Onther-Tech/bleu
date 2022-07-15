@@ -1,5 +1,5 @@
 {
-  "optimism_tx_batches": {
+  "optimism_batches_ctc": {
     "attributes": {
       "batch_index": {
         "type":  [ "string", "null" ],
@@ -41,7 +41,7 @@
     "indexes": [ [ "batch_index" ], [ "l1_tx_hash" ], [ "l1_block_number" ] ],
     "uniques": [ [ "batch_index" ] ]
   },
-  "optimism_txs": {
+  "optimism_batches_ctc_txs": {
     "attributes": {
       "index": {
         "type": [ "string", "null" ],
@@ -103,7 +103,7 @@
     "indexes": [ [ "index" ], [ "batch_index" ], [ "target" ], [ "origin" ] ],
     "uniques": [ [ "index" ] ]
   },
-  "optimism_state_batches": {
+  "optimism_batches_scc": {
     "attributes": {
       "batch_index": {
         "type": [ "string", "null" ],
@@ -145,7 +145,7 @@
     "indexes": [ [ "batch_index" ], [ "l1_tx_hash" ], [ "l1_block_number" ], [ "batch_root" ] ],
     "uniques": [ [ "batch_index" ] ]
   },
-  "optimism_state_roots": {
+  "optimism_batches_scc_roots": {
     "attributes": {
       "index": {
         "type": [ "string", "null" ],
@@ -439,7 +439,7 @@
     "indexes": [ [ "address" ], [ "block_number" ], [ "tx_hash" ], [ "block_hash" ] ],
     "uniques": [ [ "tx_hash", "log_index" ] ]
   },
-  "optimism_enqueue": {
+  "optimism_batches_enqueue": {
     "attributes": {
       "index": {
         "type": [ "string", "null" ],

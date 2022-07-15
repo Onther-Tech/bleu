@@ -15,7 +15,7 @@ export interface State {
     extra_data: string;
     l1_block_number: string;
     l1_tx_hash: string;
-    optimism_tx_batches_id: number;
+    optimism_batches_ctc_id: number;
     previous_total_elements: string;
     submitter: string;
   }[];

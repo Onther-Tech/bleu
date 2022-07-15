@@ -94,7 +94,7 @@ impl L2TxBatchPlugin {
         let batch = get_object(&response, "batch")?;
         let converted_batch = number_to_string_convert(batch, vec!["index", "timestamp", "size", "blockNumber", "prevTotalElements"])?;
         let pg_sender = senders.get("postgres");
-        let _ = pg_sender.send(PostgresMsg::new(String::from("optimism_tx_batches"), Value::Object(converted_batch.clone())))?;
+        let _ = pg_sender.send(PostgresMsg::new(String::from("optimism_batches_ctc"), Value::Object(converted_batch.clone())))?;
         let txs = get_array(&response, "transactions")?;
         let l1_tx_hash = opt_to_result(converted_batch.get("l1TransactionHash"))?;
 
@@ -102,7 +102,7 @@ impl L2TxBatchPlugin {
             let tx_map = opt_to_result(tx.as_object())?;
             let mut converted_tx = number_to_string_convert(tx_map, vec!["index", "batchIndex", "blockNumber", "timestamp", "queueIndex"])?;
             converted_tx.insert(String::from("l1_tx_hash"), l1_tx_hash.clone());
-            let _ = pg_sender.send(PostgresMsg::new(String::from("optimism_txs"), Value::Object(converted_tx.to_owned())))?;
+            let _ = pg_sender.send(PostgresMsg::new(String::from("optimism_batches_ctc_txs"), Value::Object(converted_tx.to_owned())))?;
         }
         Ok(())
     }
