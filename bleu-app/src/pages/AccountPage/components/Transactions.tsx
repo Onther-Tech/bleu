@@ -14,7 +14,7 @@ import {
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { options as rootOptions } from './state';
 import { options, state as _state } from './Transactions/state';
-import { L2AddressLink, L2TransactionLink } from '../../../components/Link';
+import { L2AddressLink, L2TransactionLink, L2AddressIndexLink } from '../../../components/Link';
 import { timeSince } from '../../../utils/time';
 import { toEther, txFee } from '../../../utils/ethUtils';
 import { useTranslation } from 'react-i18next';
@@ -79,59 +79,59 @@ function Transactions(props: any) {
         <TableBody>
           {state.records
             ? state.records.map((row, index) => (
-                <TableRow key={index}>
-                  <TableCell>
-                    <Box sx={{ display: 'flex', minWidth: '150px' }}>
-                      <L2TransactionLink sx={{ width: 0, flexGrow: 1, flexBasis: 0 }} hash={row.tx.hash} />
-                    </Box>
-                  </TableCell>
-                  <TableCell>
-                    <Typography variant="mono">{row.tx.tx_input ? row.tx.tx_input.slice(0, 10) : null}</Typography>
-                  </TableCell>
-                  <TableCell>
-                    <L2TransactionLink hash={row.tx.index} />
-                  </TableCell>
-                  <TableCell>
-                    <Typography noWrap={true}>
-                      {opts.datetime
-                        ? new Date(+row.tx.l1_timestamp * 1000).toLocaleString()
-                        : timeSince(row.tx.l1_timestamp)}
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Box sx={{ display: 'flex', minWidth: '150px' }}>
-                      {ropts.address !== row.tx.from_address ? (
-                        <L2AddressLink sx={{ width: 0, flexGrow: 1, flexBasis: 0 }} address={row.tx.from_address} />
+              <TableRow key={index}>
+                <TableCell>
+                  <Box sx={{ display: 'flex', minWidth: '150px' }}>
+                    <L2TransactionLink sx={{ width: 0, flexGrow: 1, flexBasis: 0 }} hash={row.tx.hash} />
+                  </Box>
+                </TableCell>
+                <TableCell>
+                  <Typography variant="mono">{row.tx.tx_input ? row.tx.tx_input.slice(0, 10) : null}</Typography>
+                </TableCell>
+                <TableCell>
+                  <L2AddressIndexLink index={row.tx.index} hash={row.tx.hash} />
+                </TableCell>
+                <TableCell>
+                  <Typography noWrap={true}>
+                    {opts.datetime
+                      ? new Date(+row.tx.l1_timestamp * 1000).toLocaleString()
+                      : timeSince(row.tx.l1_timestamp)}
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  <Box sx={{ display: 'flex', minWidth: '150px' }}>
+                    {ropts.address !== row.tx.from_address ? (
+                      <L2AddressLink sx={{ width: 0, flexGrow: 1, flexBasis: 0 }} address={row.tx.from_address} />
+                    ) : (
+                      <Typography variant="mono" sx={{ width: 0, flexGrow: 1, flexBasis: 0 }} noWrap={true}>
+                        {row.tx.from_address}
+                      </Typography>
+                    )}
+                  </Box>
+                </TableCell>
+                <TableCell>
+                  <Box sx={{ display: 'flex', minWidth: '150px' }}>
+                    {row.tx.to_address ? (
+                      ropts.address !== row.tx.to_address ? (
+                        <L2AddressLink sx={{ width: 0, flexGrow: 1, flexBasis: 0 }} address={row.tx.to_address} />
                       ) : (
                         <Typography variant="mono" sx={{ width: 0, flexGrow: 1, flexBasis: 0 }} noWrap={true}>
-                          {row.tx.from_address}
+                          {row.tx.to_address}
                         </Typography>
-                      )}
-                    </Box>
-                  </TableCell>
-                  <TableCell>
-                    <Box sx={{ display: 'flex', minWidth: '150px' }}>
-                      {row.tx.to_address ? (
-                        ropts.address !== row.tx.to_address ? (
-                          <L2AddressLink sx={{ width: 0, flexGrow: 1, flexBasis: 0 }} address={row.tx.to_address} />
-                        ) : (
-                          <Typography variant="mono" sx={{ width: 0, flexGrow: 1, flexBasis: 0 }} noWrap={true}>
-                            {row.tx.to_address}
-                          </Typography>
-                        )
-                      ) : (
-                        <Link underline="none" href={`/account/${row.contract_address}`}>
-                          Contract Creation
-                        </Link>
-                      )}
-                    </Box>
-                  </TableCell>
-                  <TableCell>{toEther(row.tx.value)} Ether</TableCell>
-                  <TableCell>
-                    <Typography variant="body2">{txFee(row.gas_used, row.tx.gas_price)}</Typography>
-                  </TableCell>
-                </TableRow>
-              ))
+                      )
+                    ) : (
+                      <Link underline="none" href={`/account/${row.contract_address}`}>
+                        Contract Creation
+                      </Link>
+                    )}
+                  </Box>
+                </TableCell>
+                <TableCell>{toEther(row.tx.value)} Ether</TableCell>
+                <TableCell>
+                  <Typography variant="body2">{txFee(row.gas_used, row.tx.gas_price)}</Typography>
+                </TableCell>
+              </TableRow>
+            ))
             : null}
         </TableBody>
         <TableFooter>
