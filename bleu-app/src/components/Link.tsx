@@ -22,6 +22,16 @@ export function L2AddressLink(props: any) {
   );
 }
 
+export function L2AddressIndexLink(props: any) {
+  return (
+    <Tooltip title={props.hash || ''} disableInteractive>
+      <Link variant="mono" underline="none" noWrap={true} href={`/tx/${props.hash}`} sx={props.sx}>
+        {props.index}
+      </Link>
+    </Tooltip>
+  );
+}
+
 export function L1TransactionLink(props: any) {
   return (
     <Tooltip title={props.hash || ''} disableInteractive>
