@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Table, TableBody, TableCell, TableRow, TextareaAutosize, Typography } from '@mui/material';
 import { useRecoilValueLoadable } from 'recoil';
 import { state } from './Overview/state';
-import { L2AddressLink } from '../../../components/Link';
+import { L1TransactionLink, L2AddressLink, L2BlockLink } from '../../../components/Link';
 import { timeSince } from '../../../utils/time';
 import { toEther, txFee } from '../../../utils/ethUtils';
 
@@ -53,6 +53,56 @@ function Overview() {
                 <Typography>{stateLoadable.contents.tx_ext.tx.index}</Typography>
               </TableCell>
             </TableRow>
+            {stateLoadable.contents.tx_ext.l1_tx_batch_index ? (
+              <TableRow>
+                <TableCell>
+                  <Typography>L1 Txn Batch Index</Typography>
+                </TableCell>
+                <TableCell>
+                  <L2BlockLink blockNumber={stateLoadable.contents.tx_ext.l1_tx_batch_index} isState={false} />
+                </TableCell>
+              </TableRow>
+            ) : null}
+            {stateLoadable.contents.tx_ext.l1_submission_tx_hash ? (
+              <TableRow>
+                <TableCell>
+                  <Typography>L1 Submission Tx Hash</Typography>
+                </TableCell>
+                <TableCell>
+                  <L1TransactionLink hash={stateLoadable.contents.tx_ext.l1_submission_tx_hash} />
+                </TableCell>
+              </TableRow>
+            ) : null}
+            {stateLoadable.contents.l1_origin_tx_hash ? (
+              <TableRow>
+                <TableCell>
+                  <Typography>L1 Origin Tx Hash</Typography>
+                </TableCell>
+                <TableCell>
+                  <L1TransactionLink hash={stateLoadable.contents.l1_origin_tx_hash} />
+                </TableCell>
+              </TableRow>
+            ) : null}
+            {stateLoadable.contents.tx_ext.l1_state_batch_index ? (
+              <TableRow>
+                <TableCell>
+                  <Typography>L1 State Batch Index</Typography>
+                </TableCell>
+                <TableCell>
+                  <L2BlockLink blockNumber={stateLoadable.contents.tx_ext.l1_state_batch_index} isState={true} />
+                </TableCell>
+              </TableRow>
+            ) : null}
+            {stateLoadable.contents.tx_ext.l1_state_root_submission_tx_hash ? (
+              <TableRow>
+                <TableCell>
+                  <Typography>L1 State Root Submission Tx Hash</Typography>
+                </TableCell>
+                <TableCell>
+                  <L1TransactionLink hash={stateLoadable.contents.tx_ext.l1_state_root_submission_tx_hash} />
+                </TableCell>
+              </TableRow>
+            ) : null}
             <TableRow>
               <TableCell>
                 <Typography>Timestamp</Typography>

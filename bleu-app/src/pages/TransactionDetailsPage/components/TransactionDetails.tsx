@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValueLoadable } from 'recoil';
+import { state } from './Logs/state';
 import InfoCard from '../../../components/InfoCard';
 import { Box, Tab, Tabs } from '@mui/material';
 import { options } from './state';
@@ -46,6 +47,7 @@ function a11yProps(index: number) {
 function TransactionDetails(props: any) {
   const { txHash }: any = useParams();
   const [opts, setOpts] = useRecoilState(options);
+  const stateLoadable = useRecoilValueLoadable(state);
 
   useEffect(() => {
     setOpts({
@@ -66,7 +68,7 @@ function TransactionDetails(props: any) {
       <Box sx={cardHeaderC1}>
         <Tabs value={opts.index} onChange={handleChange} aria-label="transaction-details-tabs">
           <Tab label="Overview" {...a11yProps(0)} />
-          <Tab label="Logs" {...a11yProps(1)} />
+          <Tab label={`Logs${stateLoadable.contents.length > 0 ? '(' + stateLoadable.contents.length + ')' : ''}`} {...a11yProps(1)} />
           <Tab label="Comments" {...a11yProps(2)} />
         </Tabs>
       </Box>

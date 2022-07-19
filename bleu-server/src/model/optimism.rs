@@ -15,7 +15,7 @@ pub struct OptimismTxBatchSummary {
 
 #[derive(Debug, Clone, Serialize, Deserialize, Queryable, Apiv2Schema)]
 pub struct OptimismTxBatch {
-    optimism_tx_batches_id: i64,
+    optimism_batches_ctc_id: i64,
     batch_index: Option<String>,
     batch_timestamp: Option<String>,
     batch_size: Option<String>,
@@ -155,7 +155,7 @@ impl PaginatedOptimismBlockTx {
 
 #[derive(Debug, Clone, Serialize, Deserialize, Queryable, Apiv2Schema)]
 pub struct OptimismStateBatch {
-    optimism_state_batches_id: i64,
+    optimism_batches_scc_id: i64,
     batch_index: Option<String>,
     batch_timestamp: Option<String>,
     batch_size: Option<String>,

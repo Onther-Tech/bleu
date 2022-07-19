@@ -97,7 +97,7 @@ impl L2EnqueuePlugin {
         let l1_tx_log_sender = senders.get("l1_tx_log");
         let _ = l1_tx_log_sender.send(L1TxLogMsg::new(block_number, queue_index))?;
         let pg_sender = senders.get("postgres");
-        let _ = pg_sender.send(PostgresMsg::new(String::from("optimism_enqueue"), Value::Object(response.to_owned())))?;
+        let _ = pg_sender.send(PostgresMsg::new(String::from("optimism_batches_enqueue"), Value::Object(response.to_owned())))?;
         Ok(())
     }
 }

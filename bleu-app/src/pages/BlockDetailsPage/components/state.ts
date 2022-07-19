@@ -2,7 +2,7 @@ import { atom, selector } from 'recoil';
 import { api } from '../../../utils/urlResolver';
 
 export interface State {
-  optimism_tx_batches_id: number;
+  optimism_batches_ctc_id: number;
   batch_index: string;
   batch_timestamp: string;
   batch_size: string;

@@ -1,8 +1,8 @@
 use crate::schema::ethereum::ethereum_tx_logs;
 
 table! {
-    optimism_tx_batches (optimism_tx_batches_id) {
-        optimism_tx_batches_id -> BigInt,
+    optimism_batches_ctc (optimism_batches_ctc_id) {
+        optimism_batches_ctc_id -> BigInt,
         batch_index -> Nullable<Text>,
         batch_timestamp -> Nullable<Text>,
         batch_size -> Nullable<Text>,
@@ -16,8 +16,8 @@ table! {
 }
 
 table! {
-    optimism_txs (optimism_txs_id) {
-        optimism_txs_id -> BigInt,
+    optimism_batches_ctc_txs (optimism_batches_ctc_txs_id) {
+        optimism_batches_ctc_txs_id -> BigInt,
         index -> Nullable<Text>,
         batch_index -> Nullable<Text>,
         batch_number -> Nullable<Text>,
@@ -36,8 +36,8 @@ table! {
 }
 
 table! {
-    optimism_state_batches (optimism_state_batches_id) {
-        optimism_state_batches_id -> BigInt,
+    optimism_batches_scc (optimism_batches_scc_id) {
+        optimism_batches_scc_id -> BigInt,
         batch_index -> Nullable<Text>,
         batch_timestamp -> Nullable<Text>,
         batch_size -> Nullable<Text>,
@@ -51,8 +51,8 @@ table! {
 }
 
 table! {
-    optimism_state_roots (optimism_state_roots_id) {
-        optimism_state_roots_id -> BigInt,
+    optimism_batches_scc_roots (optimism_batches_scc_roots_id) {
+        optimism_batches_scc_roots_id -> BigInt,
         index -> Nullable<Text>,
         batch_index -> Nullable<Text>,
         value -> Nullable<Text>,
@@ -146,30 +146,30 @@ table! {
 }
 
 joinable_inner!(
-    left_table_ty = optimism_txs::table,
+    left_table_ty = optimism_batches_ctc_txs::table,
     right_table_ty = optimism_block_txs::table,
     right_table_expr = optimism_block_txs::table,
     foreign_key = optimism_block_txs::dsl::index,
-    primary_key_ty = optimism_txs::dsl::index,
-    primary_key_expr = optimism_txs::dsl::index,
+    primary_key_ty = optimism_batches_ctc_txs::dsl::index,
+    primary_key_expr = optimism_batches_ctc_txs::dsl::index,
 );
 
 joinable_inner!(
-    left_table_ty = optimism_tx_batches::table,
-    right_table_ty = optimism_txs::table,
-    right_table_expr = optimism_txs::table,
-    foreign_key = optimism_txs::dsl::batch_index,
-    primary_key_ty = optimism_tx_batches::dsl::batch_index,
-    primary_key_expr = optimism_tx_batches::dsl::batch_index,
+    left_table_ty = optimism_batches_ctc::table,
+    right_table_ty = optimism_batches_ctc_txs::table,
+    right_table_expr = optimism_batches_ctc_txs::table,
+    foreign_key = optimism_batches_ctc_txs::dsl::batch_index,
+    primary_key_ty = optimism_batches_ctc::dsl::batch_index,
+    primary_key_expr = optimism_batches_ctc::dsl::batch_index,
 );
 
 joinable_inner!(
-    left_table_ty = optimism_state_roots::table,
+    left_table_ty = optimism_batches_scc_roots::table,
     right_table_ty = optimism_block_txs::table,
     right_table_expr = optimism_block_txs::table,
     foreign_key = optimism_block_txs::dsl::index,
-    primary_key_ty = optimism_state_roots::dsl::index,
-    primary_key_expr = optimism_state_roots::dsl::index,
+    primary_key_ty = optimism_batches_scc_roots::dsl::index,
+    primary_key_expr = optimism_batches_scc_roots::dsl::index,
 );
 
 joinable_inner!(
@@ -190,4 +190,4 @@ joinable_inner!(
     primary_key_expr = optimism_block_txs::dsl::hash,
 );
 
-allow_tables_to_appear_in_same_query!(optimism_block_txs, optimism_txs, optimism_state_roots, ethereum_tx_logs, optimism_tx_receipts);
+allow_tables_to_appear_in_same_query!(optimism_block_txs, optimism_batches_ctc_txs, optimism_batches_scc_roots, ethereum_tx_logs, optimism_tx_receipts);
