@@ -4,71 +4,35 @@
 
 Bleu is a collection of tools for building blockchain explorer.
 
-## Configurations
+## preparatory work
 
-### bleu-app config
+To get started with Bleu Blockexplorer, you need the following elements:
 
-- See an example config at [`.env.example`](bleu-app/.env.example) copy into a .env file before running.
+1. RUST
+   ```
+   $ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+   ```
+2. Nodejs and yarn
 
-- [`consts.ts`](bleu-app/src/utils/consts.ts)
+   ```shell
+   $ sudo apt-get update
+   $ sudo apt-get install -y build-essential
+   $ sudo apt-get install curl
+   $ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash --
+   $ sudo apt-get install -y node.js
 
-```ts
-export const L1ExplorerEndpoint = RINKEBY OR ETHEREUM MAINNET EXPLORER;
-export const BleuServerEndpoint = BLEU SERVER ENDPOINT (DEFAULT PORT:8888);
-export const L2JsonRpcEndpoint  = L2 GETH RPC ENDPOINT;
+   $ npm install -g yarn
+   ```
 
-export const MainPageAutoRefresh = true;
-```
+3. Postgresql
+   ```
+   sudo apt-get install postgresql postgresql-contrib
+   ```
 
-### bleu-server config
+## Execution order
 
-- See an example config at [`.env.example`](bleu-server/.env.example) copy into a .env file before running.
-
-- Enter the Postgres id and password.
-
-```shell
-# POSTGRESQL DB
-POSTGRES_URL=postgres://[ID:PASSWORD]@localhost:5432/postgres
-
-# BLEU SERVER CONFIG
-SERVER_HOST=0.0.0.0
-SERVER_PORT=8888
-```
-
-### bleu-daemon config
-
-- bleu-daemon uses the url of the json file in the [`task`](bleu-daemon/task) folder. Open all the json files inside the [`task`](bleu-daemon/task) folder and check the settings.
-
-- Currently, three urls are used for the json file in the task folder.
-
-  - L1 : RINKEBY OR ETHEREUM RPC ENDPOINT (eg: infura)
-  - L2 : DARIUS or OPTIMISM RPC ENDPOINT
-  - DTL : DTL RPC ENDPOINT (Includes Postfix URL Path)
-
-```json
-// l2_block_tx.json
-{
-  "l2_block_tx": {
-    "start_idx": 0,
-    "end_points": [
-      [L2 GETH RPC ENDPOINT]
-    ],
-    "filter": ""
-  }
-}
-
-// l2_enqueue.json
-{
-  "l2_enqueue": {
-    "start_idx": 0,
-    "end_points": [
-      "[DTL RPC ENDPOINT]/enqueue/index/"
-    ],
-    "filter": ""
-  }
-}
-
-```
+- The data collected by bleu-daemon is utilized by bleu-server and bleu-app, so you need to run `bleu-daemon -> bleu-server -> bleu-app` in the order.
+- For the configuration and execution method of each package, refer to the `README` for each package.
 
 ## License
 

@@ -2,6 +2,26 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Configuration
+
+- See an example config at [.env.example](.env.example) copy into a .env file before running.
+
+- [consts.ts](src/utils/consts.ts)
+
+  - L1ExplorerEndpoint : Mainnet or Testnet Etherscan endpoint
+  - BleuServerEndpoint : blue-server http endpoint
+  - L2JsonRpcEndpoint : Layer2 RPC endpoint
+  - MainPageAutoRefresh : Whether to automatically update the main page.
+
+```ts
+export const L1ExplorerEndpoint = 'https://rinkeby.etherscan.io';
+export const BleuServerEndpoint = 'http://localhost:8888';
+export const L2JsonRpcEndpoint  = 'https://testnet3.optimism.tokamak.network/'
+;
+
+export const MainPageAutoRefresh = true;
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
