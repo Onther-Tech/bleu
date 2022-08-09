@@ -1,25 +1,25 @@
-FROM rust as builder
+FROM rust:latest AS builder
 
-RUN apt update && apt install apt-utils build-essential -y
+RUN apt update && apt install libclang-dev -y \
+  && rm -rf /var/lib/apt/lists/*
 
-WORKDIR bleu-server
+WORKDIR /bleu-server
 
 COPY . .
 
-RUN cargo build --release --bin bleu-server
+RUN cargo build -j4 --release --bin bleu-server
+
 
 FROM rust:1.56-slim as runtime
 
-RUN apt update && apt install apt-utils libpq-dev -y
+RUN apt update && apt install libpq-dev -y \
+  && rm -rf /var/lib/apt/lists/*
 
-WORKDIR bleu-server
-
+WORKDIR /bleu-server
 COPY --from=builder /bleu-server/target/release/bleu-server .
-
 COPY --from=builder /bleu-server/swagger-ui ./swagger-ui
 
 ENV RUST_LOG INFO
-
-ENTRYPOINT ["./bleu-server"]
-
 EXPOSE 8888
+
+CMD ["./bleu-server"]
