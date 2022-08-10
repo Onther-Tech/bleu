@@ -120,7 +120,7 @@ export default function Footer() {
     <Box sx={root}>
       <Box sx={main}>
         <Box sx={body}>
-          <Box sx={inner}>
+          {/* <Box sx={inner}>
             <Box sx={innerItemFirst}>
               <Box sx={logoBox}>
                 <Logo />
@@ -156,7 +156,7 @@ export default function Footer() {
                 <GitHub sx={button} />
               </Box>
             </a>
-          </Box>
+          </Box> */}
         </Box>
       </Box>
     </Box>
