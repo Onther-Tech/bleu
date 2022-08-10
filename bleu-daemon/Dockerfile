@@ -1,25 +1,24 @@
-FROM rust as builder
+FROM rust:latest AS builder
 
-RUN apt update && apt install apt-utils libclang-dev -y
-
+RUN apt update && apt install libclang-dev -y \
+  && rm -rf /var/lib/apt/lists/*
 RUN rustup component add rustfmt
 
-WORKDIR bleu-daemon
+WORKDIR /bleu-daemon
 
 COPY . .
 
 RUN cargo build -j4 --release --bin bleu-daemon
 
+
 FROM rust:1.56-slim as runtime
 
-RUN apt update && apt install apt-utils -y
-
-WORKDIR bleu-daemon
+WORKDIR /bleu-daemon
 
 COPY --from=builder /bleu-daemon/target/release/bleu-daemon .
 
 ENV RUST_LOG INFO
 
-ENTRYPOINT ["./bleu-daemon", "--config-dir", "."]
+CMD ["./bleu-daemon", "--config-dir", "."]
 
 EXPOSE 9999
