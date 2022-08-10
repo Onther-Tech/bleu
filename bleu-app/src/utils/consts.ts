@@ -1,5 +1,4 @@
-export const L1ExplorerEndpoint = 'https://rinkeby.etherscan.io';
-export const BleuServerEndpoint = 'http://testnet3.explorer.optimism.tokamak.network:8888';
-export const L2JsonRpcEndpoint = 'https://testnet3.optimism.tokamak.network/';
-
-export const MainPageAutoRefresh = true;
+export const L1ExplorerEndpoint = process.env.REACT_APP_L1ExplorerEndpoint || '';
+export const BleuServerEndpoint = process.env.REACT_APP_BleuServerEndpoint || '';
+export const L2JsonRpcEndpoint = process.env.REACT_APP_L2JsonRpcEndpoint || '';
+export const MainPageAutoRefresh = process.env.REACT_APP_MainPageAutoRefresh || true;
