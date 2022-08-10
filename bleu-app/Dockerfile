@@ -23,10 +23,6 @@ COPY .env.${NODE_ENV:-development} .env.local
 ENV NODE_ENV production
 RUN yarn build
 
+EXPOSE 3000
 
-FROM caddy:2.5.2-alpine
-COPY --from=builder /app/build /usr/share/caddy
-
-EXPOSE 80
-
-CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
+CMD ["yarn", "serve"]

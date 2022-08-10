@@ -1,12 +1,15 @@
 version: '3'
+
 services:
   bleu-daemon:
-    container_name: bleu-daemon
-    build: ./bleu-daemon
+    image: onthertech/optimism.explorer.daemon:latest
+    build:
+      context: ./bleu-daemon
+      dockerfile: Dockerfile
     ports:
-      - "9999:9999"
+      - 9999:9999
     extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - host.docker.internal:host-gateway
     depends_on:
       - db
     volumes:
@@ -14,16 +17,25 @@ services:
       - ./bleu-daemon/schema:/bleu-daemon/schema
       - ./bleu-daemon/config.docker.toml:/bleu-daemon/config.toml
   bleu-server:
-    container_name: bleu-server
-    build: ./bleu-server
+    image: onthertech/optimism.explorer.server:latest
+    build:
+      context: ./bleu-server
+      dockerfile: Dockerfile
+    env_file:
+      - ./bleu-server/.env.docker
     ports:
-      - "8888:8888"
+      - 8888:8888
     depends_on:
       - db
-    environment:
-      - POSTGRES_URL=postgres://root:postgresql@db:5432/postgres
-      - SERVER_HOST=0.0.0.0
-      - SERVER_PORT=8888
+  bleu-app:
+    image: onthertech/optimism.explorer.app:latest
+    build:
+      context: ./bleu-app
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: rinkeby
+    ports:
+      - 3000:3000
   db:
     image: postgres
     container_name: postgres
@@ -31,4 +43,4 @@ services:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=postgresql
     ports:
-      - "5432:5432"
+      - 5432:5432
