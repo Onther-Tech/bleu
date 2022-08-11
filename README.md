@@ -1,39 +1,27 @@
-# Bleu
+# Tokamak Optimism Block Explorer
 
-**BLockchain Explorer sUite**
+### Configuration
 
-Bleu is a collection of tools for building blockchain explorer.
+Modify follow files
 
-## preparatory work
+- bleu-daemon/task/*
+- bleu-daemon/config.docker.toml
+- bleu-app/.env.rinkeby
 
-To get started with Bleu Blockexplorer, you need the following elements:
+### Build
 
-1. RUST
-   ```
-   $ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-   ```
-2. Nodejs and yarn
+```
+docker-compose build
+```
 
-   ```shell
-   $ sudo apt-get update
-   $ sudo apt-get install -y build-essential
-   $ sudo apt-get install curl
-   $ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash --
-   $ sudo apt-get install -y node.js
+### Run
 
-   $ npm install -g yarn
-   ```
+```
+docker-compose up -d
+```
 
-3. Postgresql
-   ```
-   sudo apt-get install postgresql postgresql-contrib
-   ```
+### Open Block Explorer
 
-## Execution order
-
-- The data collected by bleu-daemon is utilized by bleu-server and bleu-app, so you need to run `bleu-daemon -> bleu-server -> bleu-app` in the order.
-- For the configuration and execution method of each package, refer to the `README` for each package.
-
-## License
-
-[AGPL-3.0](https://github.com/turnpike/bleu/blob/main/LICENSE)
+```
+http://localhost:3000
+```

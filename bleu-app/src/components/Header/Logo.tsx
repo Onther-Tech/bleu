@@ -5,7 +5,7 @@ function Logo() {
   return (
     <Typography variant="h5" sx={{ userSelect: 'none' }}>
       <Link href="/" color="inherit" underline="none">
-        BLEU
+        Tokamak Optimism Explorer
       </Link>
     </Typography>
   );
