@@ -2,7 +2,7 @@
   "l2_tx_batch": {
     "start_idx": 0,
     "end_points": [
-      "http://testnet3.optimism.tokamak.network:7878/batch/transaction/index/"
+      "http://k8s-default-datatran-59b46273c0-a139a7a108d4c7e9.elb.ap-northeast-2.amazonaws.com:7878/batch/transaction/index/"
     ],
     "filter": ""
   }

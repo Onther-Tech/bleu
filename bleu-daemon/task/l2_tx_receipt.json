@@ -2,7 +2,7 @@
   "l2_tx_receipt": {
     "start_idx": 0,
     "end_points": [
-      "https://testnet3.optimism.tokamak.network"
+      "https://rinkeby.optimism.tokamak.network"
     ],
     "filter": ""
   }

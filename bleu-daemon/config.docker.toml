@@ -23,16 +23,16 @@ warn="https://hooks.slack.com/services/"
 error="https://hooks.slack.com/services/"
 
 [l2blocktx]
-poll-interval=1000
+poll-interval=5000
 
 [l2txbatch]
-poll-interval=1000
+poll-interval=5000
 
 [l2statebatch]
-poll-interval=1000
+poll-interval=5000
 
 [l2enqueue]
-poll-interval=1000
+poll-interval=5000
 
 [l1txlog]
 retry-count=3
