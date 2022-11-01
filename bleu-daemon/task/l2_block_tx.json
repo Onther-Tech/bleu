@@ -2,7 +2,7 @@
   "l2_block_tx": {
     "start_idx": 0,
     "end_points": [
-      "https://rinkeby.optimism.tokamak.network"
+      "https://goerli.optimism.tokamak.network"
     ],
     "filter": ""
   }
