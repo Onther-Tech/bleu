@@ -1,4 +1,4 @@
-name: Publish App Nighly Version
+name: Publish Daemon Nighly Version
 
 on:
   # push:
@@ -60,7 +60,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: bleu-app
+          context: bleu-daemon
           push: true
           tags: |
             onthertech/tokamak.explorer-daemon:nightly
