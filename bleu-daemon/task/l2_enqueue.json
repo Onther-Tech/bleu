@@ -2,7 +2,7 @@
   "l2_enqueue": {
     "start_idx": 0,
     "end_points": [
-      "http://k8s-default-datatran-9e22bba560-57070c32d72d0007.elb.ap-northeast-2.amazonaws.com:7878/enqueue/index/"
+      "http://k8s-default-datatran-84ee5bb4ee-2119712f67bff0c8.elb.ap-northeast-2.amazonaws.com:7878/enqueue/index/"
     ],
     "filter": ""
   }

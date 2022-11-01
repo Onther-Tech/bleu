@@ -1,0 +1,121 @@
+name: Publish Explorer Release Version
+
+on:
+  push:
+    tags:
+      - 'release-*'
+
+jobs:
+  build-app:
+    name: Publish Explorer App for release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Get version
+        id: extractver
+        run: |
+          echo ::set-output name=RELEASE::"${GITHUB_REF#refs/*/}"
+          echo ::set-output name=VERSION::$(jq -r .version ./bleu-app/package.json)
+          echo ::set-output name=GITSHA::"$GITHUB_SHA"
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: bleu-app
+          push: true
+          tags: |
+            onthertech/tokamak.explorer-app:latest
+            onthertech/tokamak.explorer-app:${{ steps.extractver.outputs.RELEASE }}
+            onthertech/tokamak.explorer-app:${{ steps.extractver.outputs.VERSION }}
+            onthertech/tokamak.explorer-app:${{ steps.extractver.outputs.GITSHA }}
+
+  build-daemon:
+    name: Publish Explorer Daemon for release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Get version
+        id: extractver
+        run: |
+          echo ::set-output name=RELEASE::"${GITHUB_REF#refs/*/}"
+          echo ::set-output name=VERSION::$(jq -r .version ./bleu-daemon/package.json)
+          echo ::set-output name=GITSHA::"$GITHUB_SHA"
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: bleu-daemon
+          push: true
+          tags: |
+            onthertech/tokamak.explorer-daemon:latest
+            onthertech/tokamak.explorer-daemon:${{ steps.extractver.outputs.RELEASE }}
+            onthertech/tokamak.explorer-daemon:${{ steps.extractver.outputs.VERSION }}
+            onthertech/tokamak.explorer-daemon:${{ steps.extractver.outputs.GITSHA }}
+
+  build-server:
+    name: Publish Explorer Server for release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Get version
+        id: extractver
+        run: |
+          echo ::set-output name=RELEASE::"${GITHUB_REF#refs/*/}"
+          echo ::set-output name=VERSION::$(jq -r .version ./bleu-server/package.json)
+          echo ::set-output name=GITSHA::"$GITHUB_SHA"
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: bleu-server
+          push: true
+          tags: |
+            onthertech/tokamak.explorer-server:latest
+            onthertech/tokamak.explorer-server:${{ steps.extractver.outputs.RELEASE }}
+            onthertech/tokamak.explorer-server:${{ steps.extractver.outputs.VERSION }}
+            onthertech/tokamak.explorer-server:${{ steps.extractver.outputs.GITSHA }}

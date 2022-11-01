@@ -2,7 +2,7 @@
   "l1_tx_log": {
     "start_idx": 0,
     "end_points": [
-      "https://rinkeby.rpc.tokamak.network"
+      "https://goerli.rpc.tokamak.network"
     ],
     "filter": ""
   }
