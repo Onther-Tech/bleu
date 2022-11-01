@@ -1,9 +1,9 @@
 name: Publish Daemon Nighly Version
 
 on:
-  # push:
-  #   paths:
-  #     - 'bleu-daemon/**'
+  push:
+    paths:
+      - 'bleu-daemon/**'
   #   branches:
   #     - 'main'
   workflow_dispatch:
