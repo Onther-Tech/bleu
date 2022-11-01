@@ -4,8 +4,8 @@ on:
   push:
     paths:
       - 'bleu-app/**'
-    # branches:
-    #   - 'main'
+    branches:
+      - 'main'
   workflow_dispatch:
 
 jobs:
@@ -26,13 +26,13 @@ jobs:
         uses: 'phips28/gh-action-bump-version@master'
         with:
           skip-tag: 'true'
-          target-branch: 'OR-375_create-image'
+          target-branch: 'main'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PACKAGEJSON_DIR: 'bleu-app'
 
   development:
-    name: Publish Explorer App for development
+    name: Publish Explorer App for nightly
     needs: bump-version
     runs-on: ubuntu-latest
 
