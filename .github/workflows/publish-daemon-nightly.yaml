@@ -27,7 +27,7 @@ jobs:
         with:
           skip-tag: 'true'
           skip-push: 'true'
-          target-branch: 'main'
+          target-branch: 'OR-375_create-image'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PACKAGEJSON_DIR: 'bleu-daemon'
