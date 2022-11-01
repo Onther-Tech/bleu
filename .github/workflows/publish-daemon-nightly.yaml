@@ -1,11 +1,11 @@
 name: Publish App Nighly Version
 
 on:
-  push:
-    paths:
-      - 'bleu-app/**'
-    branches:
-      - 'main'
+  # push:
+  #   paths:
+  #     - 'bleu-daemon/**'
+  #   branches:
+  #     - 'main'
   workflow_dispatch:
 
 jobs:
@@ -26,13 +26,14 @@ jobs:
         uses: 'phips28/gh-action-bump-version@master'
         with:
           skip-tag: 'true'
+          skip-push: 'true'
           target-branch: 'main'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PACKAGEJSON_DIR: 'bleu-app'
+          PACKAGEJSON_DIR: 'bleu-daemon'
 
   build:
-    name: Publish Explorer App for nightly
+    name: Publish Explorer Daemon for nightly
     needs: bump-version
     runs-on: ubuntu-latest
 
@@ -62,5 +63,5 @@ jobs:
           context: bleu-app
           push: true
           tags: |
-            onthertech/tokamak.explorer-app:nightly
-            onthertech/tokamak.explorer-app:nightly-${{ steps.extractver.outputs.VERSION }}
+            onthertech/tokamak.explorer-daemon:nightly
+            onthertech/tokamak.explorer-daemon:nightly-${{ steps.extractver.outputs.VERSION }}
