@@ -4,8 +4,8 @@ on:
   push:
     paths:
       - 'bleu-daemon/**'
-  #   branches:
-  #     - 'main'
+    branches:
+      - 'main'
   workflow_dispatch:
 
 jobs:
@@ -26,8 +26,7 @@ jobs:
         uses: 'phips28/gh-action-bump-version@master'
         with:
           skip-tag: 'true'
-          skip-push: 'true'
-          target-branch: 'OR-375_create-image'
+          target-branch: 'main'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PACKAGEJSON_DIR: 'bleu-daemon'
