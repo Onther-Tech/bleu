@@ -33,7 +33,7 @@ services:
       context: ./bleu-app
       dockerfile: Dockerfile
       args:
-        NODE_ENV: rinkeby
+        NODE_ENV: goerli
     ports:
       - 3000:3000
   db:
